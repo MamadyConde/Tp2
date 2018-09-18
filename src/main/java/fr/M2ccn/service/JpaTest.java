@@ -26,14 +26,11 @@ public class JpaTest {
 			emp.addEmployee(new Employee("Captain Nemo",d2));
 			emp.addEmployee(new Employee("ines",d3));
 			System.out.println("----------------------");
-			List<Employee> prods =emp.Employee();
+			List<Employee> prods =emp.Employes();
 			for (Employee empl : prods) {
 				System.out.println(empl.getName());
 			}
-			List<Employee> parid =emp.Employeepariddepart(2);
-			for (Employee emplparid : parid) {
-				System.out.println(emplparid.getName());
-			}
+			
 	}
 }
 

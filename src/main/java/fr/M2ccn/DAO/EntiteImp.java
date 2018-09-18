@@ -40,6 +40,7 @@ public class EntiteImp implements EntiteDAO {
 		
 
 	}
+	
 
 	public void addDepartment(Department D) {
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -53,22 +54,7 @@ public class EntiteImp implements EntiteDAO {
 		}
 
 	}
-	public List<Employee> Employee() {
-		//creation d'une criteria builder
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		//creation d'une criteriaQuery
-		   CriteriaQuery<Object> emp  = cb.createQuery();
-		   //creation de la requete au sein de criteriaQuery(select*From Employee e as from
-		   Root<Employee> from = emp.from(Employee.class);
-		   emp.select(from);
-		   //transmission du CriteriaQuery a l'entityManager qui construit la 
-		   //requete sql et retourne un TypedQuery
-		   TypedQuery query = entityManager.createQuery(emp);
-		   //Lancement du TypedQuery qui retourne le resultat de la requete
-		   //Object resulset = typedQuery.getSingleResult();
-		   //	System.out.println(resulset);
-		return query.getResultList();
-	}
+
 	public List<Employee> Employes() {
 		//creer un objet Query en utilisant le methode createQuery() de entityManager
 		// avec la requete JPA appelé HQL ou JPA QL sans connaitre les tables mais que les classes
@@ -77,7 +63,20 @@ public class EntiteImp implements EntiteDAO {
 		List<Employee> liste = query.getResultList();
 		return liste;
 	}
-	public List<Employee> Employeepariddepart(int id){
+	public List<Department> departments() {
+		//creer un objet Query en utilisant le methode createQuery() de entityManager
+		// avec la requete JPA appelé HQL ou JPA QL sans connaitre les tables mais que les classes
+		
+		Query query=entityManager.createQuery("select d from Department d");
+		List<Department> liste = query.getResultList();
+		return liste;
+	}
+	public Employee EmployeeparNom(Long id){
+		Employee employechercher  =entityManager.find(Employee.class, id);
+		return employechercher ;
+		
+	}
+	/*public List<Employee> Employeepariddepart(int id){
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Object> emp  = cb.createQuery();
 		Root<Employee> from = emp.from(Employee.class);
@@ -87,5 +86,22 @@ public class EntiteImp implements EntiteDAO {
 		return query.getResultList();
 		
 	}
+	
+	public List<Employee> Employee() {
+	//creation d'une criteria builder
+	CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+	//creation d'une criteriaQuery
+	   CriteriaQuery<Object> emp  = cb.createQuery();
+	   //creation de la requete au sein de criteriaQuery(select*From Employee e as from
+	   Root<Employee> from = emp.from(Employee.class);
+	   emp.select(from);
+	   //transmission du CriteriaQuery a l'entityManager qui construit la 
+	   //requete sql et retourne un TypedQuery
+	   TypedQuery query = entityManager.createQuery(emp);
+	   //Lancement du TypedQuery qui retourne le resultat de la requete
+	   //Object resulset = typedQuery.getSingleResult();
+	   //	System.out.println(resulset);
+	return query.getResultList();
+}*/
 	    
 }
